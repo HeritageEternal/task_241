@@ -16,9 +16,9 @@ yay -S python-requests
 pacman -Q samba bind bind-tools
 ```
 
-![1.png](1.png)
+![1.png](images/1.png)
 
-![2.png](2.png)
+![2.png](images/2.png)
 
 ### 2.2
 Для вывода всех файлов пакета используется флаг `-Ql` (сокращено через `head`):
@@ -27,12 +27,12 @@ pacman -Q samba bind bind-tools
 pacman -Ql bind-tools | head -n 5
 ```
 
-![3.png](3.png)
+![3.png](images/3.png)
 
 ### 2.3
 Чтобы узнать зависимости, смотрим детальную информацию о пакете с помощью `-Qi` и фильтруем поле "Depends On":
 
-![4.png](4.png)
+![4.png](images/4.png)
 
 ## 3. Службы
 
@@ -50,13 +50,13 @@ systemctl start smb nmb named
 systemctl enable --now smb nmb named
 ```
 
-![5.png](5.png)
+![5.png](images/5.png)
 
 ## 4. Конфигурационные файлы
 
 В Arch Linux `pacman` хранит информацию о конфигурационных (backup) файлах. Их можно найти через `pacman -Qii`.
 
-![6.png](6.png)
+![6.png](images/6.png)
 
 ## 5. Службы, журнал
 
@@ -66,12 +66,12 @@ systemctl enable --now smb nmb named
 ### 5.2
 Журнал службы можно посмотреть с помощью `journalctl`. Флаг `-u` фильтрует по юниту, `-n 5` показывает последние 5 строк:
 
-![7.png](7.png)
+![7.png](images/7.png)
 
 ### 5.3
 Команда `systemctl show smb -p User` возвращает пустое значение, что означает запуск от пользователя `root`. Проверка процессов с помощью команды `ps -o user,pid,cmd -C smbd` подтверждает, что главный процесс и его воркеры работают от имени `root`. Службе Samba необходимы права суперпользователя для аутентификации клиентов и динамического переключения прав доступа при работе с файлами разных пользователей (`show -p User` работает только для пары служб, где юзер явно задан, по типу `polkit` и т.д.).
 
-![8.png](8.png)
+![8.png](images/8.png)
 
 ## 6. Вывод
 
